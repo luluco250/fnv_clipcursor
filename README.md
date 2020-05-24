@@ -28,11 +28,11 @@ project is located (like `src/nvse_plugin_example`). It should look like this:
 ```
 📁...
 └📁common
-└📁nvse
 └📁fnv_clipcursor
  └...
  └📄fnv_clipcursor.sln
  └...
+└📁nvse
 ```
 
 Unfortunately due to the dependency on the behavior of MSVC 9.0, this project
