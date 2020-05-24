@@ -15,7 +15,7 @@ void CALLBACK find_game_window_timer(
 	UINT_PTR timer_id,
 	DWORD tick_count);
 
-void setup_hooks();
+void inject_wndproc();
 
 LRESULT CALLBACK injected_wndproc(
 	HWND window,

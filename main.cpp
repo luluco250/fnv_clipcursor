@@ -41,11 +41,12 @@ EXPORT bool NVSEPlugin_Query(
 EXPORT bool NVSEPlugin_Load(
 	const NVSEInterface* nvse
 ) {
-	if (SetTimer(
-		NULL,
-		0,
-		TryFindWindowIntervalMs,
-		find_game_window_timer) == 0
+	if (
+		SetTimer(
+			NULL,
+			0,
+			TryFindWindowIntervalMs,
+			find_game_window_timer) == 0
 	) {
 		fatal_error("Failed to set timer");
 		return false;
@@ -87,10 +88,10 @@ void CALLBACK find_game_window_timer(
 		return;
 
 	KillTimer(window, timer_id);
-	setup_hooks();
+	inject_wndproc();
 }
 
-void setup_hooks() {
+void inject_wndproc() {
 	GameWndProc = reinterpret_cast<WNDPROC>(
 		GetWindowLongPtrA(GameWindow, GWLP_WNDPROC));
 
@@ -99,7 +100,8 @@ void setup_hooks() {
 		return;
 	}
 
-	if (SetWindowLongPtrA(
+	if (
+		SetWindowLongPtrA(
 			GameWindow,
 			GWLP_WNDPROC,
 			reinterpret_cast<LONG>(&injected_wndproc)) == 0
