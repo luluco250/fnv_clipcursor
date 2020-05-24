@@ -32,6 +32,10 @@ EXPORT bool NVSEPlugin_Query(
 	info->name = ModName;
 	info->version = 2;
 
+	std::string log_filename(ModName);
+	log_filename.append(".log");
+	gLog.Open(log_filename.c_str());
+
 	if (!version_check(nvse))
 		return false;
 
@@ -111,6 +115,8 @@ void inject_wndproc() {
 	}
 
 	setup_clipcursor(GameWindow);
+
+	_MESSAGE("fnv_clipcursor setup correctly");
 }
 
 LRESULT CALLBACK injected_wndproc(
